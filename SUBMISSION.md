@@ -13,10 +13,12 @@ https://github.com/Viswanath129/votewise-ai-election-assistant
 
 ---
 
-### 2. Google Cloud Run URL (After Deployment)
+### 2. Google Cloud Run URL ✅
 ```
-https://votewise-ai-[HASH]-uc.a.run.app
+https://votewiseai-185003774821.asia-south1.run.app
 ```
+
+**Status:** LIVE - 100% traffic serving
 
 **Deployment Command:**
 ```bash
