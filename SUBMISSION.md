@@ -6,14 +6,10 @@
 
 ### 1. GitHub Repository URL
 ```
-https://github.com/[YOUR_USERNAME]/votewise-ai
+https://github.com/Viswanath129/votewise-ai-election-assistant
 ```
 
-**Note:** Replace [YOUR_USERNAME] with your actual GitHub username. To push:
-```bash
-git remote set-url origin https://github.com/YOUR_USERNAME/votewise-ai.git
-git push -u origin main
-```
+**Repository Status:** ✅ Successfully pushed (77 objects, 122 KiB)
 
 ---
 
