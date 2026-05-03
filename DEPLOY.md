@@ -14,7 +14,7 @@ Create `.env.local` file in project root (already gitignored):
 
 ```bash
 # Windows PowerShell
-$env:GEMINI_API_KEY = "AIzaSyChnJbt43Pdpp7ITyJLCMnzb7O02hT0x9Y"
+$env:GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE"
 ```
 
 ---
@@ -34,7 +34,7 @@ gcloud run deploy votewise-ai-election-assistant `
   --source . `
   --region asia-south1 `
   --allow-unauthenticated `
-  --set-env-vars "GEMINI_API_KEY=AIzaSyChnJbt43Pdpp7ITyJLCMnzb7O02hT0x9Y"
+  --set-env-vars "GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE"
 ```
 
 ### Option B: Using Cloud Build
@@ -43,7 +43,7 @@ gcloud run deploy votewise-ai-election-assistant `
 # Submit build with substitution
 gcloud builds submit `
   --config cloudbuild.yaml `
-  --substitutions=_GEMINI_API_KEY=AIzaSyChnJbt43Pdpp7ITyJLCMnzb7O02hT0x9Y
+  --substitutions=_GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
 ```
 
 ### Option C: Docker Build Locally
@@ -53,7 +53,7 @@ gcloud builds submit `
 docker build -t gcr.io/YOUR_PROJECT_ID/votewise-ai .
 
 # Run locally first to test
-docker run -p 3000:3000 -e GEMINI_API_KEY=AIzaSyChnJbt43Pdpp7ITyJLCMnzb7O02hT0x9Y votewise-ai
+docker run -p 3000:3000 -e GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE votewise-ai
 
 # Push to GCR
 docker push gcr.io/YOUR_PROJECT_ID/votewise-ai
@@ -117,7 +117,7 @@ gcloud run deploy votewise-ai-election-assistant --source . --region us-central1
 ## Quick Deploy Command (Copy & Paste)
 
 ```bash
-cd b:\projects\promptwars\votewise-ai && gcloud run deploy votewise-ai-election-assistant --source . --region asia-south1 --allow-unauthenticated --set-env-vars "GEMINI_API_KEY=AIzaSyChnJbt43Pdpp7ITyJLCMnzb7O02hT0x9Y"
+cd b:\projects\promptwars\votewise-ai && gcloud run deploy votewise-ai-election-assistant --source . --region asia-south1 --allow-unauthenticated --set-env-vars "GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE"
 ```
 
 ---
