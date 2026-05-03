@@ -1,0 +1,42 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Google Cloud
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: 185003774821
+
+    - name: Configure Docker
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: asia-south1-docker.pkg.dev/185003774821/votewise-ai/votewiseai:latest
+        platforms: linux/amd64
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy votewiseai \
+          --image=asia-south1-docker.pkg.dev/185003774821/votewise-ai/votewiseai:latest \
+          --region=asia-south1 \
+          --allow-unauthenticated \
+          --set-env-vars="NODE_ENV=production"
