@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getChatResponse, sanitizeInput } from '@/lib/chatEngine';
 
+// Static export configuration
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 // Simple in-memory rate limiting
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_REQUESTS = 30;
