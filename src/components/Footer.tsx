@@ -1,38 +1,50 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Vote, Heart } from 'lucide-react';
+import { Vote, Heart, ExternalLink, Sparkles } from 'lucide-react';
 
 export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="border-t border-slate-200/60 dark:border-slate-800/60 bg-gradient-to-b from-white to-slate-50 dark:from-[#0F172A] dark:to-[#0F172A]">
+      <div className="container-premium py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-5"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
                 <Vote className="w-5 h-5" />
               </div>
-              <span className="font-bold text-xl text-slate-900 dark:text-white">
-                VoteWise AI
+              <span className="font-bold text-xl text-[#0F172A] dark:text-white tracking-tight">
+                VoteWise <span className="text-[#2563EB]">AI</span>
               </span>
             </div>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
-              Empowering Indian voters with AI-powered education about elections, 
-              registration, and the democratic process.
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Empowering Indian citizens with clear, instant guidance on elections, 
+              voter registration, and democratic participation.
             </p>
-            <p className="text-xs text-slate-500 dark:text-slate-500">
-              {t.footer.disclaimer}
-            </p>
-          </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#10B981]/10 text-[#10B981] rounded-full text-xs font-medium w-fit">
+              <Sparkles className="w-3 h-3" />
+              <span>100% Offline • No API Needed</span>
+            </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
-              Quick Links
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <h3 className="font-semibold text-[#0F172A] dark:text-white mb-4 text-sm uppercase tracking-wider">
+              Official Resources
             </h3>
             <ul className="space-y-2">
               <li>
@@ -40,9 +52,10 @@ export default function Footer() {
                   href="https://voters.eci.gov.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#3B82F6] flex items-center gap-1.5 group transition-colors"
                 >
                   Voter Registration Portal
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
@@ -50,9 +63,10 @@ export default function Footer() {
                   href="https://electoralsearch.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#3B82F6] flex items-center gap-1.5 group transition-colors"
                 >
                   Electoral Search
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
@@ -60,18 +74,24 @@ export default function Footer() {
                   href="https://eci.gov.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#3B82F6] flex items-center gap-1.5 group transition-colors"
                 >
                   Election Commission of India
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Resources */}
-          <div>
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
-              Resources
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h3 className="font-semibold text-[#0F172A] dark:text-white mb-4 text-sm uppercase tracking-wider">
+              Helpful Links
             </h3>
             <ul className="space-y-2">
               <li>
@@ -79,9 +99,10 @@ export default function Footer() {
                   href="https://nvsp.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#3B82F6] flex items-center gap-1.5 group transition-colors"
                 >
                   NVSP Portal
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
@@ -89,9 +110,10 @@ export default function Footer() {
                   href="https://voterhelpline.eci.gov.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#3B82F6] flex items-center gap-1.5 group transition-colors"
                 >
                   Voter Helpline
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
@@ -99,29 +121,36 @@ export default function Footer() {
                   href="https://play.google.com/store/apps/details?id=com.eci.citizen"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-[#2563EB] dark:hover:text-[#3B82F6] flex items-center gap-1.5 group transition-colors"
                 >
                   Voter Helpline App
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-800/60"
+        >
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1">
-              {t.footer.copyright}
-              <span className="inline-flex items-center">
-                Made with <Heart className="w-4 h-4 text-red-500 mx-1 fill-red-500" /> in India
+              © 2024 VoteWise AI
+              <span className="inline-flex items-center mx-2">
+                Crafted with <Heart className="w-3.5 h-3.5 text-[#DC2626] mx-1 fill-[#DC2626]" /> for Indian Democracy
               </span>
             </p>
             <p className="text-xs text-slate-500 dark:text-slate-500">
-              Powered by Gemini AI • Built with Next.js & Firebase
+              Offline Smart Assistant • Built with Next.js & Tailwind
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

@@ -3,37 +3,37 @@ export const translations = {
     hero: {
       title: 'VoteWise AI',
       tagline: 'Understand Elections. Vote Smarter.',
-      description: 'Your AI-powered offline guide to Indian elections. No internet needed for answers. Learn about voting, registration, and your rights - even without connectivity!',
-      ctaPrimary: 'Ask AI Assistant',
+      description: 'Simple guidance for voter registration, election process, documents, timelines, and your rights as a citizen.',
+      ctaPrimary: 'Start Asking',
       ctaSecondary: 'Explore Guide',
     },
     chat: {
-      title: 'Election Assistant',
-      placeholder: 'Ask about elections, voting, registration...',
+      title: 'Ask VoteWise AI',
+      placeholder: 'What would you like to know?',
       sendButton: 'Send',
-      loadingText: 'Thinking...',
-      welcomeMessage: 'Hello! I am VoteWise AI - your offline election assistant. I have 50+ election FAQs ready to help you instantly. No internet required! Ask about voter registration, documents, EVMs, or voting process.',
+      loadingText: 'Finding answer...',
+      welcomeMessage: 'Hello! I am VoteWise AI — your offline election assistant with 50+ topics. Ask me about voter registration, required documents, EVMs, or anything about the election process.',
     },
     sections: {
       registration: {
         title: 'Voter Registration Guide',
-        subtitle: 'Step-by-step process to get your Voter ID',
+        subtitle: 'Everything you need to get your Voter ID (EPIC)',
       },
       documents: {
         title: 'Required Documents',
-        subtitle: 'Documents you need for voter registration',
+        subtitle: 'ID proof, address proof, and photos explained',
       },
       faq: {
-        title: 'Frequently Asked Questions',
-        subtitle: 'Common questions about elections and voting',
+        title: 'Common Questions',
+        subtitle: 'Quick answers to popular election topics',
       },
       mythFact: {
         title: 'Myth vs Fact',
-        subtitle: 'Busting common misconceptions about voting',
+        subtitle: 'Separate truth from election rumors',
       },
       timeline: {
         title: 'Election Timeline',
-        subtitle: 'Key dates and phases of elections',
+        subtitle: 'From announcement to results — know what happens when',
       },
     },
     common: {
