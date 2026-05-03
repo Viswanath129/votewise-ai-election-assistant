@@ -46,7 +46,7 @@ export default function Hero() {
       aria-label="Hero section"
     >
       {/* Premium Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-[#0F172A] dark:via-[#0F172A] dark:to-[#1E293B]" />
+      <div className="hero-gradient-bg absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-[#0F172A] dark:via-[#0F172A] dark:to-[#1E293B]" />
       
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

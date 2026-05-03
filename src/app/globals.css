@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
 :root {
   /* Premium Color System */
@@ -21,18 +21,6 @@
   --foreground: #0F172A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-dark: var(--primary-dark);
-  --color-dark-navy: var(--dark-navy);
-  --color-muted-gray: var(--muted-gray);
-  --color-accent-green: var(--accent-green);
-  --color-accent-saffron: var(--accent-saffron);
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-heading: 'Sora', 'Inter', system-ui, sans-serif;
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -173,10 +161,78 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Section Spacing */
 .section-padding {
-  @apply py-20 md:py-28 lg:py-32;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
 
 /* Container */
 .container-premium {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-premium {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-premium {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section Layout Fixes */
+section {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent content overlap */
+section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for absolute positioned elements */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure proper stacking context */
+.hero-gradient-bg {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
