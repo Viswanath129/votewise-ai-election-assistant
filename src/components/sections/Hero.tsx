@@ -29,9 +29,9 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-sm font-medium mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-sm font-medium mb-8">
           <Sparkles className="w-4 h-4" />
-          <span>AI-Powered Election Education</span>
+          <span>AI-Powered Offline Election Assistant</span>
         </div>
 
         {/* Main Title */}

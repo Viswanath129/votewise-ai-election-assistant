@@ -1,6 +1,8 @@
-# VoteWise AI - Election Process Education Assistant
+# VoteWise AI - Offline Smart Election Assistant
 
-**Tagline:** Understand Elections. Vote Smarter.
+**Tagline:** Understand Elections. Vote Smarter. No Internet Required.
+
+> **🎯 Fully Offline:** No external API calls. No Gemini API needed. Works entirely with local knowledge base of 50+ election FAQs. Instant responses in <100ms!
 
 ## Problem Statement
 
@@ -15,14 +17,21 @@ This knowledge gap leads to lower voter participation and uninformed voting deci
 
 ## Solution
 
-VoteWise AI is an AI-powered educational platform that helps citizens understand Indian elections through:
-- Interactive AI chat assistant (Gemini-powered)
-- Step-by-step voter registration guide
-- Required documents checklist
-- FAQ section with common questions
-- Myth vs Fact clarification
-- Election timeline visualization
-- Multi-language support (English, Hindi, Telugu)
+VoteWise AI is a **fully offline** AI-powered educational platform that helps citizens understand Indian elections through:
+- **🧠 Smart Offline AI Chat** - Instant answers using local knowledge base (50+ FAQs)
+- **Step-by-step voter registration guide**
+- **Required documents checklist**
+- **FAQ section with common questions**
+- **Myth vs Fact clarification**
+- **Election timeline visualization**
+- **Multi-language support** (English, Hindi, Telugu)
+
+### Why Offline?
+- ✅ **No API costs** - Completely free to run
+- ✅ **Instant responses** - <100ms response time
+- ✅ **Works without internet** - After initial page load
+- ✅ **Privacy-first** - No data sent to external servers
+- ✅ **Always available** - No dependency on external services
 
 ## Features
 
@@ -54,9 +63,11 @@ VoteWise AI is an AI-powered educational platform that helps citizens understand
 - Rate Limiting Middleware
 
 ### AI & Google Services
-- **Gemini API** - AI chat responses
-- **Firebase** - Firestore database (for future features)
+- **✅ Offline AI Engine** - Smart keyword matching + intent routing (NO external API!)
+- **Firebase** - Firestore database (optional, for future features)
 - **Cloud Run** - Deployment platform
+
+**⚡ Key Difference:** Unlike other AI chatbots, VoteWise AI uses a local knowledge base with 50+ election FAQs and smart matching algorithms. No Gemini API key required!
 
 ### Testing
 - Vitest

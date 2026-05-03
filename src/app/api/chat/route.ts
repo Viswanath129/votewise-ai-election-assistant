@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateResponse } from '@/lib/gemini';
-import { sanitizeInput, validatePrompt } from '@/lib/utils';
+import { getChatResponse, sanitizeInput } from '@/lib/chatEngine';
 
 // Simple in-memory rate limiting
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_REQUESTS = parseInt(process.env.RATE_LIMIT_REQUESTS_PER_MINUTE || '30');
+const RATE_LIMIT_REQUESTS = 30;
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 
 function checkRateLimit(ip: string): { allowed: boolean; remaining: number } {
@@ -38,15 +37,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Parse and validate request body
+    // Parse request body
     const body = await request.json();
     const { prompt } = body;
 
     // Validate prompt
-    const validation = validatePrompt(prompt);
-    if (!validation.valid) {
+    if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
       return NextResponse.json(
-        { error: validation.error },
+        { error: 'Please enter a question' },
+        { status: 400 }
+      );
+    }
+
+    if (prompt.length > 200) {
+      return NextResponse.json(
+        { error: 'Question is too long (max 200 characters)' },
         { status: 400 }
       );
     }
@@ -54,15 +59,20 @@ export async function POST(request: NextRequest) {
     // Sanitize input
     const sanitizedPrompt = sanitizeInput(prompt);
 
-    // Generate AI response
-    const response = await generateResponse(sanitizedPrompt);
+    // Generate offline response (instant, no API call needed)
+    const { response, confidence, responseTime } = getChatResponse(sanitizedPrompt);
 
     return NextResponse.json(
-      { response },
+      { 
+        response, 
+        confidence,
+        responseTimeMs: Math.round(responseTime)
+      },
       { 
         status: 200,
         headers: {
           'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-Response-Time': `${Math.round(responseTime)}ms`,
         }
       }
     );

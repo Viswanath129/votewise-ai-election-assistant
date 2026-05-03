@@ -3,7 +3,7 @@ export const translations = {
     hero: {
       title: 'VoteWise AI',
       tagline: 'Understand Elections. Vote Smarter.',
-      description: 'Your AI-powered guide to Indian elections. Learn about the voting process, registration, and your rights as a citizen.',
+      description: 'Your AI-powered offline guide to Indian elections. No internet needed for answers. Learn about voting, registration, and your rights - even without connectivity!',
       ctaPrimary: 'Ask AI Assistant',
       ctaSecondary: 'Explore Guide',
     },
@@ -12,7 +12,7 @@ export const translations = {
       placeholder: 'Ask about elections, voting, registration...',
       sendButton: 'Send',
       loadingText: 'Thinking...',
-      welcomeMessage: 'Hello! I am VoteWise AI. Ask me anything about Indian elections, voter registration, or the voting process.',
+      welcomeMessage: 'Hello! I am VoteWise AI - your offline election assistant. I have 50+ election FAQs ready to help you instantly. No internet required! Ask about voter registration, documents, EVMs, or voting process.',
     },
     sections: {
       registration: {

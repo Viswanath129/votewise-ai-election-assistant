@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ChatMessage } from '@/types';
 import { Send, Bot, User, Loader2 } from 'lucide-react';
-import { sanitizeInput, validatePrompt } from '@/lib/utils';
+import { getChatResponse, sanitizeInput } from '@/lib/chatEngine';
 
 export default function ChatAssistant() {
   const { t } = useLanguage();
@@ -35,8 +35,12 @@ export default function ChatAssistant() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const validation = validatePrompt(input);
-    if (!validation.valid) {
+    // Validate input
+    if (!input || input.trim().length === 0) {
+      return;
+    }
+
+    if (input.length > 200) {
       return;
     }
 
@@ -55,18 +59,13 @@ export default function ChatAssistant() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: sanitizedInput }),
-      });
-
-      const data = await response.json();
+      // Use local chat engine - instant offline response
+      const { response } = getChatResponse(sanitizedInput);
 
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.response || 'Sorry, I could not process your request.',
+        content: response,
         timestamp: new Date(),
       };
 
@@ -75,7 +74,7 @@ export default function ChatAssistant() {
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Sorry, there was an error connecting to the AI service. Please try again.',
+        content: 'Sorry, I encountered an error. Please try again with a different question.',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -210,7 +209,7 @@ export default function ChatAssistant() {
                   </Button>
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 text-center">
-                  Powered by Gemini AI • Responses are for educational purposes only
+                  Offline Smart Assistant • 50+ election FAQs • Instant responses • No external API
                 </p>
               </form>
             </CardContent>
