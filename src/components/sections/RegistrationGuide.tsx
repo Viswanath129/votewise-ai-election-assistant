@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -13,7 +14,8 @@ import {
   Users, 
   CreditCard,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  ArrowRight
 } from 'lucide-react';
 
 const iconMap: { [key: string]: React.ReactNode } = {
@@ -44,98 +46,110 @@ export default function RegistrationGuide() {
   return (
     <section
       id="registration-section"
-      className="py-20 bg-slate-50 dark:bg-slate-900"
+      className="py-20 bg-gradient-to-b from-white to-slate-50 dark:from-[#0F172A] dark:to-[#1E293B]"
       aria-label="Voter Registration Guide"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+      <div className="container-premium">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2563EB]/10 text-[#2563EB] text-sm font-semibold mb-4">
+            <FileText className="w-4 h-4" />
+            Voter Registration Guide
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] dark:text-white mb-4 tracking-tight">
             {t.sections.registration.title}
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             {t.sections.registration.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Progress Bar */}
-        <div className="max-w-3xl mx-auto mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-slate-600 dark:text-slate-400">
+        <div className="max-w-3xl mx-auto mb-10">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
               {t.common.step} {currentStep + 1} of {registrationSteps.length}
             </span>
-            <span className="text-sm text-blue-600 dark:text-blue-400">
+            <span className="text-sm font-semibold text-[#2563EB] dark:text-[#3B82F6]">
               {Math.round(((currentStep + 1) / registrationSteps.length) * 100)}%
             </span>
           </div>
-          <div className="h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-blue-600 transition-all duration-300"
+          <div className="h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-full overflow-hidden shadow-inner">
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6] transition-all duration-500 ease-out"
               style={{ width: `${((currentStep + 1) / registrationSteps.length) * 100}%` }}
+              layoutId="progressBar"
             />
           </div>
         </div>
 
         {/* Step Cards */}
         <div className="max-w-3xl mx-auto">
-          <Card className="shadow-lg border-slate-200 dark:border-slate-800">
+          <Card className="shadow-2xl border-slate-200/50 dark:border-slate-800/50 overflow-hidden bg-white/80 dark:bg-[#1E293B]/80 backdrop-blur-xl">
             <CardContent className="p-8">
-              <div className="flex flex-col md:flex-row gap-6 items-start">
-                {/* Icon */}
-                <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
-                  {iconMap[registrationSteps[currentStep].icon]}
-                </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] as const }}
+                  className="flex flex-col md:flex-row gap-8 items-start"
+                >
+                  {/* Icon */}
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2563EB]/10 to-[#3B82F6]/10 text-[#2563EB] flex items-center justify-center flex-shrink-0 shadow-lg"
+                  >
+                    <div className="scale-110">
+                      {iconMap[registrationSteps[currentStep].icon]}
+                    </div>
+                  </motion.div>
 
-                {/* Content */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                      {t.common.step} {registrationSteps[currentStep].id}
-                    </span>
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2563EB]/10 text-[#2563EB] text-sm font-semibold">
+                        {t.common.step} {registrationSteps[currentStep].id}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white mb-4 tracking-tight">
+                      {registrationSteps[currentStep].title}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                      {registrationSteps[currentStep].description}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
-                    {registrationSteps[currentStep].title}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
-                    {registrationSteps[currentStep].description}
-                  </p>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
 
               {/* Navigation */}
-              <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-                <Button
-                  variant="outline"
-                  onClick={prevStep}
-                  disabled={currentStep === 0}
-                  className="flex items-center gap-2"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  {t.common.previous}
-                </Button>
-                
-                <div className="flex gap-1">
-                  {registrationSteps.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentStep(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === currentStep
-                          ? 'bg-blue-600 w-6'
-                          : 'bg-slate-300 dark:bg-slate-700'
-                      }`}
-                      aria-label={`Go to step ${index + 1}`}
-                    />
-                  ))}
-                </div>
-
-                <Button
-                  onClick={nextStep}
-                  disabled={currentStep === registrationSteps.length - 1}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700"
-                >
-                  {t.common.next}
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
+              <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200/50 dark:border-slate-800/50">
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    variant="outline"
+                    onClick={prevStep}
+                    disabled={currentStep === 0}
+                    className="px-6 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 hover:border-[#2563EB] hover:text-[#2563EB] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <ChevronLeft className="w-4 h-4 mr-2" />
+                    {t.common.previous}
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    onClick={nextStep}
+                    disabled={currentStep === registrationSteps.length - 1}
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#2563EB] text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {t.common.next}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </motion.div>
               </div>
             </CardContent>
           </Card>
@@ -145,20 +159,22 @@ export default function RegistrationGuide() {
         <div className="max-w-4xl mx-auto mt-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {registrationSteps.map((step, index) => (
-              <button
+              <motion.button
                 key={step.id}
                 onClick={() => setCurrentStep(index)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className={`p-4 rounded-xl text-center transition-all ${
                   index === currentStep
-                    ? 'bg-blue-600 text-white shadow-lg'
+                    ? 'bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] text-white shadow-lg shadow-blue-500/25'
                     : index < currentStep
-                    ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
-                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                    ? 'bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/20'
+                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50 hover:border-[#2563EB]/30'
                 }`}
               >
-                <div className="text-2xl mb-2">{step.id}</div>
+                <div className="text-2xl mb-2 font-bold">{step.id}</div>
                 <div className="text-xs font-medium">{step.title}</div>
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
