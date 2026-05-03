@@ -202,37 +202,24 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Section Layout Fixes */
-section {
+/* Hero specific fixes */
+#hero {
   position: relative;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-/* Prevent content overlap */
-section > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Fix for absolute positioned elements */
-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Ensure proper stacking context */
-.hero-gradient-bg {
+#hero .hero-gradient-bg {
   position: absolute !important;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: -1;
+}
+
+/* General section fixes */
+section {
+  position: relative;
+  width: 100%;
 }
