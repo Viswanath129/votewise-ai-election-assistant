@@ -63,14 +63,23 @@ export default function ChatAssistant() {
       // Use local chat engine - instant offline response
       const { response } = getChatResponse(sanitizedInput);
 
-      const assistantMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: response,
-        timestamp: new Date(),
-      };
+      // Simulate typing for better UX
+      setIsTyping(true);
+      setTypingMessage(response);
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      // Simulate typing delay
+      setTimeout(() => {
+        const assistantMessage: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: response,
+          timestamp: new Date(),
+        };
+
+        setMessages((prev) => [...prev, assistantMessage]);
+        setIsTyping(false);
+        setTypingMessage(null);
+      }, Math.min(response.length * 10, 1500)); // Typing speed based on message length
     } catch (error) {
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -92,8 +101,9 @@ export default function ChatAssistant() {
     'How does vote counting work?',
   ];
 
-  // Simulate typing effect
+  // Typing animation state
   const [typingMessage, setTypingMessage] = useState<string | null>(null);
+  const [isTyping, setIsTyping] = useState(false);
 
   return (
     <section
@@ -174,7 +184,29 @@ export default function ChatAssistant() {
                   ))}
                 </AnimatePresence>
                 
-                {isLoading && (
+                {isTyping && typingMessage && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#10B981] to-[#059669] text-white flex items-center justify-center flex-shrink-0 shadow-md">
+                      <Sparkles className="w-4 h-4 animate-pulse" />
+                    </div>
+                    <div className="bg-white dark:bg-[#1E293B] rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm border border-slate-200/60 dark:border-slate-700/60">
+                      <p className="text-sm leading-relaxed whitespace-pre-line">
+                        {typingMessage}
+                        <motion.span
+                          animate={{ opacity: [1, 0, 1] }}
+                          transition={{ duration: 1, repeat: Infinity }}
+                          className="inline-block w-2 h-4 bg-blue-600 ml-1"
+                        />
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {isLoading && !isTyping && (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}

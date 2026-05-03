@@ -2,13 +2,22 @@
 // No external API required - 100% local keyword matching
 
 import { electionFAQs, faqsByCategory, getQuickResponse, FAQItem } from '@/data/faq';
+import { sanitizeInput as secureSanitize, detectSuspiciousContent, SecurityLogger } from './security';
 
-// Sanitize user input
+// Enhanced user input sanitization
 export function sanitizeInput(input: string): string {
-  return input
-    .replace(/[<>]/g, '') // Remove HTML tags
-    .trim()
-    .slice(0, 200); // Limit to 200 characters
+  if (!input || typeof input !== 'string') {
+    return '';
+  }
+
+  // Check for suspicious content
+  if (detectSuspiciousContent(input)) {
+    SecurityLogger.log('SUSPICIOUS_INPUT', `Suspicious content detected: ${input}`, 'high');
+    return '';
+  }
+
+  // Use enhanced security sanitization
+  return secureSanitize(input);
 }
 
 // Tokenize input into words
