@@ -1,30 +1,47 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "VoteWise AI - Understand Elections, Vote Smarter",
-  description: "AI-powered election education platform. Learn about Indian elections, voter registration, voting process, and your democratic rights.",
-  keywords: ["voting", "elections", "india", "voter registration", "democracy", "EVM", "election commission"],
+  title: "VoteWise AI | Understand Elections. Vote Smarter.",
+  description: "Your AI-powered offline election assistant. Get instant answers about voter registration, documents, EVMs, and voting rights. 50+ election FAQs. Works without internet.",
+  keywords: ["voting", "elections", "india", "voter registration", "democracy", "EVM", "election commission", "voter id", "how to vote"],
   authors: [{ name: "VoteWise AI" }],
+  creator: "VoteWise AI",
+  publisher: "VoteWise AI",
+  robots: "index, follow",
   openGraph: {
-    title: "VoteWise AI - Election Education Assistant",
-    description: "Your AI-powered guide to Indian elections. Understand elections, vote smarter.",
+    title: "VoteWise AI | Understand Elections. Vote Smarter.",
+    description: "Your AI-powered offline election assistant. Get instant answers about Indian elections, voter registration, and voting rights.",
     type: "website",
+    locale: "en_IN",
+    siteName: "VoteWise AI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VoteWise AI | Understand Elections. Vote Smarter.",
+    description: "Your AI-powered offline election assistant. Get instant answers about Indian elections.",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
   },
 };
 
@@ -36,10 +53,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${sora.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white dark:bg-slate-950">
+      <body className={`min-h-full flex flex-col bg-white dark:bg-[#0F172A] ${inter.variable} ${sora.variable}`}>
         <ThemeProvider>
           <LanguageProvider>
             <Header />
