@@ -17,17 +17,17 @@ if ! gcloud auth list --filter=status:ACTIVE --format="value(account)" | grep -q
 fi
 
 # Set the project (you may need to change this to your project ID)
-PROJECT_ID="your-project-id"
+PROJECT_ID="185003774821"
 echo "📋 Using project: $PROJECT_ID"
 
 # Build and deploy using Cloud Build
 echo "🏗️  Building and deploying with Cloud Build..."
-gcloud builds submit --config=cloudbuild.yaml --region=europe-west1 .
+gcloud builds submit --config=cloudbuild.yaml --region=asia-south1 .
 
 if [ $? -eq 0 ]; then
     echo "✅ Deployment successful!"
-    echo "🌐 Your app should be available at: https://votewise-ai-election-assistant-185003774821.europe-west1.run.app/"
-    echo "🔍 Check the deployment with: gcloud run services describe votewise-ai --region=europe-west1"
+    echo "🌐 Your app should be available at: https://votewiseai-185003774821.asia-south1.run.app/"
+    echo "🔍 Check the deployment with: gcloud run services describe votewiseai --region=asia-south1"
 else
     echo "❌ Deployment failed. Please check the logs above."
     exit 1

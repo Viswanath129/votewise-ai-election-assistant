@@ -13,11 +13,11 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'votewise-ai'
+      - 'votewiseai'
       - '--image'
       - 'gcr.io/$PROJECT_ID/votewise-ai'
       - '--region'
-      - 'europe-west1'
+      - 'asia-south1'
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
