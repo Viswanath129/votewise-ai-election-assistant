@@ -22,7 +22,7 @@ echo "📋 Using project: $PROJECT_ID"
 
 # Build and deploy using Cloud Build
 echo "🏗️  Building and deploying with Cloud Build..."
-gcloud builds submit --config=cloudbuild.yaml --region=asia-south1 .
+gcloud builds submit --config=cloudbuild.yaml --region=asia-south1 --substitutions=_GEMINI_API_KEY=AIzaSyDzqb_MR_rQfPdReusiwqyhnS6qLxNMv28 .
 
 if [ $? -eq 0 ]; then
     echo "✅ Deployment successful!"

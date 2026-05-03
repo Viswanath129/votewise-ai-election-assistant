@@ -29,6 +29,10 @@ steps:
       - '0'
       - '--max-instances'
       - '10'
+      - '--set-env-vars'
+      - 'GEMINI_API_KEY=$_GEMINI_API_KEY'
+    substitutions:
+      _GEMINI_API_KEY: 'AIzaSyDzqb_MR_rQfPdReusiwqyhnS6qLxNMv28'
 
 images:
   - 'gcr.io/$PROJECT_ID/votewise-ai'
